@@ -99,4 +99,57 @@ class PostController extends Controller
         $post->restore();
         dd('deleted');
     }
+
+//    firstOrCreate - нужно подтянуть данные, которых еще нет, из базы; иногда нужно для проверки дубликатов
+//    updateOrCreate - тоже проверка дубликатов (если нет совпадений - создается, если есть измененные данные, но есть такие же атрибуты - апдейтится)
+
+    public function firstOrCreate()
+    {
+//        $post = Post::find(1);
+
+        $anotherPost = [
+            'title' => 'some post',
+            'content' => 'some content',
+            'image' => 'some image.jpg',
+            'likes' => 100000,
+            'is_published' => true,
+        ];
+
+        $post = Post::firstOrCreate([
+            'title' => 'some post'
+        ], [
+            'title' => 'some post',
+            'content' => 'some content',
+            'image' => 'some image.jpg ',
+            'likes' => 100000,
+            'is_published' => true,
+        ]);
+
+        dump($post->content);
+        dd('finished');
+    }
+
+    public function updateOrCreate()
+    {
+        $anotherPost = [
+            'title' => 'update or create title',
+            'content' => 'update or create content',
+            'image' => 'update or create image.jpg',
+            'likes' => 350,
+            'is_published' => true,
+        ];
+
+        $post = Post::updateOrCreate([
+            'title' => 'some post or not'
+        ], [
+            'title' => 'some post or not',
+            'content' => 'impossible update or create content',
+            'image' => 'impossible update or create image.jpg',
+            'likes' => 350,
+            'is_published' => true,
+        ]);
+
+        dump($post->content);
+        dd('hiiiiiii');
+    }
 }
