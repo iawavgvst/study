@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/start_page', function () {
+    return 'hello! this is start page. please, wipe your feet before entering.';
+});
