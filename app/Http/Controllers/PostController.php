@@ -34,4 +34,41 @@ class PostController extends Controller
         dump($post->title);
         dd('the end');
     }
+
+    public function create()
+    {
+        $postsArr = [
+            [
+                'title' => 'title of post from phpstorm',
+                'content' => 'something interesting',
+                'image' => 'someimage.jpg',
+                'likes' => 13,
+                'is_published' => true,
+            ],
+            [
+                'title' => 'another title of post from phpstorm',
+                'content' => 'something even more interesting',
+                'image' => 'another someimage.jpg',
+                'likes' => 150,
+                'is_published' => true,
+            ]
+        ];
+
+//        Post::create([
+//            'title' => 'another title of post from phpstorm',
+//            'content' => 'something even more interesting',
+//            'image' => 'another someimage.jpg',
+//            'likes' => 150,
+//            'is_published' => true,
+//        ]);
+//
+//        dd('created');
+
+        foreach ($postsArr as $item)
+        {
+            Post::create($item);
+        }
+
+        dd('created');
+    }
 }
