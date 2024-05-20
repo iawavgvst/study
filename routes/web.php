@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/start_page', 'FirstController@index');
+
+Route::get('/posts', 'PostController@index');
