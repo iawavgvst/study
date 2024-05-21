@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="{{ route('post.index') }}">Posts</a>
+                        <a class="nav-link" href="{{ route('post.index') }}">Posts</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
