@@ -23,6 +23,15 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             $table->softDeletes();
+
+            $table->unsignedBigInteger('category_id')->nullable();
+
+//            $table->index('category_id', 'post_category_idx');
+//
+//            $table->foreign('category_id', 'post_category_fk')->on('categories')->references('id');
+
+//            прочитала и посмотрела видеоурок, где сказано, что это ошибка на стороне ларавеля, поэтому сейчас для подобной связи именно с id не обязательно городить конструкции.
+//            можно еще писать так: $table->foreignId('category_id')->constrained('categories')
         });
     }
 
