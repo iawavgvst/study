@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -11,31 +12,39 @@ class PostController extends Controller
 {
     public function index()
     {
-//        $posts = Post::all();
-
-//        $category = Category::find(1);
-
-        $post = Post::find(1);
-        $tag = Tag::find(1);
-
-        dd($tag->posts);
-
-//        return view('post.index', compact('posts'));
+        $posts = Post::all();
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function store()
     {
         $data = request()->validate([
-            'title' => 'string',
+            'title' => 'required|string',
+//            "required|string" делает ошибку в случае незаполнения поля - типа "The title field is required"
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
+            'tags' => '',
         ]);
-        Post::create($data);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
+        $post = Post::create($data);
+//        foreach ($tags as $tag) {
+//            PostTag::firstOrCreate([
+//                'tag_id' => $tag,
+//                'post_id' => $post->id,
+//            ]);
+//        } способ неплохой, но менее профессиональный (???)
+        $post->tags()->attach($tags);
+
         return redirect()->route('post.index');
     }
 
@@ -47,7 +56,9 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function update(Post $post)
@@ -56,9 +67,15 @@ class PostController extends Controller
             'title' => 'string',
             'content' => 'string',
             'image' => 'string',
+            'category_id' => '',
+            'tags' => '',
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
 
         $post->update($data);
+//        $post = $post->fresh(); - можно и не использовать
+        $post->tags()->sync($tags);
         return redirect()->route('post.show', $post->id);
     }
 
