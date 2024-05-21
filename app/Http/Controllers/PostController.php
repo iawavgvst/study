@@ -30,9 +30,9 @@ class PostController extends Controller
 //        dd('the end');
 //        - это возможные методы вызова, для себя сохранила
 
-        $post = Post::where('is_published', true)->first();
-        dump($post->title);
-        dd('the end');
+        $posts = Post::all();
+
+        return view('posts', compact('posts'));
     }
 
     public function create()
