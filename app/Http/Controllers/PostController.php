@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,17 +13,19 @@ class PostController extends Controller
     {
 //        $posts = Post::all();
 
-        $category = Category::find(1);
+//        $category = Category::find(1);
 
         $post = Post::find(1);
-        dd($post->category);
+        $tag = Tag::find(1);
+
+        dd($tag->posts);
 
 //        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-       return view('post.create');
+        return view('post.create');
     }
 
     public function store()
