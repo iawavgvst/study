@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/start_page', 'FirstController@index');
+Route::get('/start_page', 'FirstController@index')->name('start');
 
 
 Route::group(['namespace' => 'Post'], function () {
@@ -32,6 +32,13 @@ Route::group(['namespace' => 'Post'], function () {
     Route::delete('/posts/{post}', 'DestroyController')->name('post.delete');
 });
 
+//Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
+//    Route::group(['namespace' => 'Post'], function () {
+//        Route::get('/posts', 'IndexController')->name('admin.post.index');
+//    });
+//});
+
+// мы не проходим админку, но я изучу этот момент отдельно
 
 
 Route::get('/posts/update', 'PostController@update');

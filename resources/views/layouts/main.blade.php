@@ -13,7 +13,8 @@
     <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -26,7 +27,8 @@
                         <a class="nav-link" href="{{ route('about.index') }}">About</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="{{ route('contact.index') }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="{{ route('contact.index') }}" id="navbarDropdown"
+                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Contacts
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,6 +41,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('post.index') }}">Posts</a>
                     </li>
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Enter</a>
+                        </li>
+                    @endguest
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -46,14 +53,14 @@
                 </form>
             </div>
         </nav>
-{{--        <nav>--}}
-{{--            <ul>--}}
-{{--                <li><a href="{{ route('main.index') }}">Main</a></li>--}}
-{{--                <li><a href="{{ route('about.index') }}">About</a></li>--}}
-{{--                <li><a href="{{ route('contact.index') }}">Contacts</a></li>--}}
-{{--                <li><a href="{{ route('post.index') }}">Posts</a></li>--}}
-{{--            </ul>--}}
-{{--        </nav>--}}
+        {{--        <nav>--}}
+        {{--            <ul>--}}
+        {{--                <li><a href="{{ route('main.index') }}">Main</a></li>--}}
+        {{--                <li><a href="{{ route('about.index') }}">About</a></li>--}}
+        {{--                <li><a href="{{ route('contact.index') }}">Contacts</a></li>--}}
+        {{--                <li><a href="{{ route('post.index') }}">Posts</a></li>--}}
+        {{--            </ul>--}}
+        {{--        </nav>--}}
     </div>
     <div>
         @yield('content')
