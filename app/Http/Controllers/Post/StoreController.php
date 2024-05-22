@@ -3,20 +3,14 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
 
 class StoreController extends Controller
 {
-    public function __invoke()
+    public function __invoke(StoreRequest $request) // реквест нужно вставить в виде аргумента
     {
-        $data = request()->validate([
-            'title' => 'required|string',
-//            "required|string" делает ошибку в случае незаполнения поля - типа "The title field is required"
-            'content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-        ]);
+        $data = $request->validated();
         $tags = $data['tags'];
         unset($data['tags']);
 
