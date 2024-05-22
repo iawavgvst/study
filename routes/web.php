@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 Route::get('/start_page', 'FirstController@index');
 
@@ -49,3 +47,7 @@ Route::get('/about', 'AboutController@index')->name('about.index');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //в этом уроке используем ссылку на laravel сайт и на bootstrap 4 сайт: 1) https://laravel.com/docs/11.x/controllers, 2) https://getbootstrap.com/docs/4.0/content/reboot/
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
