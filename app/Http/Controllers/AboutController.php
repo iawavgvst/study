@@ -9,6 +9,7 @@ class AboutController extends Controller
 {
     public function index()
     {
+        $this->authorize('view', auth()->user());
         return view('about');
     }
 }
